@@ -16,7 +16,7 @@ Repositório de configurações externas que serão servidas pelo Config Server 
 | `product-service*.yml` | Configurações do serviço de produtos com perfis `dev` e `prod`. |
 | `user-service*.yml` | Configurações do serviço de usuários com perfis `dev` e `prod`. |
 
-Cada arquivo base (`*.yml`) é carregado automaticamente quando o microserviço com o mesmo `spring.application.name` solicita suas propriedades ao Config Server. Os arquivos com sufixo `-dev` e `-prod` ativam ajustes específicos por perfil de execução.
+Cada arquivo base (`*.yml`) é carregado automaticamente quando o microserviço com o mesmo `spring.application.name` solicita suas propriedades ao Config Server. Os arquivos com sufixo `-dev` e `-prod` utilizam `spring.config.activate.on-profile` para habilitar ajustes específicos por perfil de execução.
 
 ## Utilização
 

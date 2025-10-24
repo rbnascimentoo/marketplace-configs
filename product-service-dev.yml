@@ -1,5 +1,7 @@
 spring:
-  profiles: dev
+  config:
+    activate:
+      on-profile: dev
   datasource:
     url: ${PRODUCT_DB_URL:jdbc:postgresql://localhost:5432/product_db_dev}
     username: ${PRODUCT_DB_USERNAME:product_user}

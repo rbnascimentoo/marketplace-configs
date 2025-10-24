@@ -1,5 +1,7 @@
 spring:
-  profiles: prod
+  config:
+    activate:
+      on-profile: prod
   datasource:
     url: ${PAYMENT_DB_URL:jdbc:postgresql://payment-db:5432/payment_db}
     username: ${PAYMENT_DB_USERNAME}

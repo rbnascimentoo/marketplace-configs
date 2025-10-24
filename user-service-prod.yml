@@ -1,5 +1,7 @@
 spring:
-  profiles: prod
+  config:
+    activate:
+      on-profile: prod
   datasource:
     url: ${USER_DB_URL:jdbc:postgresql://user-db:5432/user_db}
     username: ${USER_DB_USERNAME}

@@ -1,5 +1,7 @@
 spring:
-  profiles: prod
+  config:
+    activate:
+      on-profile: prod
   datasource:
     url: ${ORDER_DB_URL:jdbc:postgresql://order-db:5432/order_db}
     username: ${ORDER_DB_USERNAME}
