@@ -1,0 +1,23 @@
+spring:
+  profiles: dev
+  datasource:
+    url: ${AUTH_DB_URL:jdbc:postgresql://localhost:5432/auth_db_dev}
+    username: ${AUTH_DB_USERNAME:auth_user}
+    password: ${AUTH_DB_PASSWORD:auth_pass}
+    hikari:
+      maximum-pool-size: 4
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      authorizationserver:
+        issuer: http://localhost:8080
+logging:
+  level:
+    root: DEBUG
+    com.marketplace.auth: DEBUG
+auth:
+  jwt:
+    private-key: ${AUTH_JWT_PRIVATE_KEY:}
+    public-key: ${AUTH_JWT_PUBLIC_KEY:}

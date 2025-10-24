@@ -1,0 +1,21 @@
+spring:
+  profiles: dev
+  cloud:
+    gateway:
+      default-filters:
+        - name: Retry
+          args:
+            retries: 1
+            statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
+      httpclient:
+        connect-timeout: 2000
+        response-timeout: 5s
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH_JWT_ISSUER_URI:http://localhost:8081/realms/marketplace}
+logging:
+  level:
+    root: DEBUG
+    org.springframework.cloud.gateway: DEBUG
