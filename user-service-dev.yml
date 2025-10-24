@@ -1,0 +1,21 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: ${USER_DB_URL:jdbc:postgresql://localhost:5432/user_db_dev}
+    username: ${USER_DB_USERNAME:user_user}
+    password: ${USER_DB_PASSWORD:user_pass}
+    hikari:
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: update
+logging:
+  level:
+    root: DEBUG
+    com.marketplace.user: DEBUG
+user:
+  avatar-storage:
+    provider: local
+    path: ${USER_AVATAR_LOCAL_PATH:./.storage/avatars}

@@ -1,0 +1,33 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${CONFIG_GIT_URI:https://github.com/company/marketplace-configs}
+          default-label: ${CONFIG_GIT_BRANCH:main}
+          username: ${CONFIG_GIT_USERNAME:}
+          password: ${CONFIG_GIT_PASSWORD:}
+          search-paths:
+            - .
+          timeout: 10
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,refresh,busrefresh
+logging:
+  level:
+    org.springframework.cloud.config.server: INFO

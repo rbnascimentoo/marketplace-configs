@@ -1,0 +1,21 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  kafka:
+    consumer:
+      group-id: notification-service-dev
+    properties:
+      security.protocol: PLAINTEXT
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+logging:
+  level:
+    root: DEBUG
+notification:
+  channels:
+    sms:
+      enabled: false
+    push:
+      enabled: false

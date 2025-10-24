@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      auto-offset-reset: latest
+      properties:
+        security.protocol: SASL_SSL
+        sasl.mechanism: SCRAM-SHA-512
+        sasl.jaas.config: ${KAFKA_SASL_JAAS_CONFIG}
+  mail:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+notification:
+  channels:
+    sms:
+      enabled: ${NOTIFICATION_SMS_ENABLED:true}
+    push:
+      enabled: ${NOTIFICATION_PUSH_ENABLED:true}

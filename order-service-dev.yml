@@ -1,0 +1,31 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: ${ORDER_DB_URL:jdbc:postgresql://localhost:5432/order_db_dev}
+    username: ${ORDER_DB_USERNAME:order_user}
+    password: ${ORDER_DB_PASSWORD:order_pass}
+    hikari:
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: update
+  kafka:
+    consumer:
+      group-id: order-service-dev
+logging:
+  level:
+    root: DEBUG
+order:
+  payment:
+    timeout: 10s
+  integrations:
+    product-service:
+      base-url: http://localhost:8082
+    payment-service:
+      base-url: http://localhost:8084
+    user-service:
+      base-url: http://localhost:8085
+    notification-service:
+      base-url: http://localhost:8086

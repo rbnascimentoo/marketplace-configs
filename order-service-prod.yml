@@ -1,0 +1,32 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${ORDER_DB_URL:jdbc:postgresql://order-db:5432/order_db}
+    username: ${ORDER_DB_USERNAME}
+    password: ${ORDER_DB_PASSWORD}
+    hikari:
+      maximum-pool-size: ${ORDER_DB_MAX_POOL_SIZE:20}
+      minimum-idle: 5
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      auto-offset-reset: latest
+  zipkin:
+    base-url: ${ZIPKIN_URL:https://zipkin.marketplace.com}
+logging:
+  level:
+    root: INFO
+order:
+  payment:
+    timeout: 45s
+  integrations:
+    product-service:
+      base-url: ${PRODUCT_SERVICE_URL:https://product.marketplace.internal}
+    payment-service:
+      base-url: ${PAYMENT_SERVICE_URL:https://payment.marketplace.internal}
+    user-service:
+      base-url: ${USER_SERVICE_URL:https://user.marketplace.internal}
+    notification-service:
+      base-url: ${NOTIFICATION_SERVICE_URL:https://notification.marketplace.internal}

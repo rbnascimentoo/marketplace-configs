@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${CONFIG_GIT_URI:file:${user.home}/workspace/marketplace-configs}
+          default-label: ${CONFIG_GIT_BRANCH:work}
+logging:
+  level:
+    root: DEBUG

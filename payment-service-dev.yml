@@ -1,0 +1,34 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: ${PAYMENT_DB_URL:jdbc:postgresql://localhost:5432/payment_db_dev}
+    username: ${PAYMENT_DB_USERNAME:payment_user}
+    password: ${PAYMENT_DB_PASSWORD:payment_pass}
+    hikari:
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: update
+  cloud:
+    stream:
+      bindings:
+        settlement-out-0:
+          destination: payment.settlement.dev
+        refund-out-0:
+          destination: payment.refund.dev
+logging:
+  level:
+    root: DEBUG
+payment:
+  provider:
+    stripe:
+      api-key: ${STRIPE_API_KEY:}
+      webhook-secret: ${STRIPE_WEBHOOK_SECRET:}
+    paypal:
+      client-id: ${PAYPAL_CLIENT_ID:}
+      client-secret: ${PAYPAL_CLIENT_SECRET:}
+  integrations:
+    order-service:
+      base-url: http://localhost:8083
