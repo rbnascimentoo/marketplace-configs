@@ -10,8 +10,13 @@ spring:
           default-label: ${CONFIG_GIT_BRANCH:main}
           clone-on-start: true
           skip-ssl-validation: ${CONFIG_GIT_SKIP_SSL:false}
+          timeout: 5
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,refresh,busrefresh,env
+        include: health,info,metrics
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.config: INFO

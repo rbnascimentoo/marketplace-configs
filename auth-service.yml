@@ -1,11 +1,11 @@
 server:
-  port: 0
+  port: 8081
 spring:
   application:
-    name: auth-service
+    name: marketplace-auth-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${AUTH_DB_URL:jdbc:postgresql://localhost:5432/auth_db}
+    url: ${AUTH_DB_URL:jdbc:postgresql://auth-db:5432/auth_db}
     username: ${AUTH_DB_USERNAME:auth_user}
     password: ${AUTH_DB_PASSWORD:auth_pass}
     hikari:
@@ -19,19 +19,19 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-  security:
-    oauth2:
-      authorizationserver:
-        issuer: ${AUTH_JWT_ISSUER:http://localhost:9000}
-        token-endpoint:
-          access-token-time-to-live: ${AUTH_ACCESS_TOKEN_TTL:PT15M}
-          refresh-token-time-to-live: ${AUTH_REFRESH_TOKEN_TTL:P30D}
-        client-settings:
-          require-authorization-consent: false
-auth:
-  jwt:
-    private-key: ${AUTH_JWT_PRIVATE_KEY:-----BEGIN PRIVATE KEY-----\n...}
-    public-key: ${AUTH_JWT_PUBLIC_KEY:-----BEGIN PUBLIC KEY-----\n...}
+#  security:
+#    oauth2:
+#      authorizationserver:
+#        issuer: ${AUTH_JWT_ISSUER:http://keycloak:8080/realms/marketplace}
+#        token-endpoint:
+#          access-token-time-to-live: ${AUTH_ACCESS_TOKEN_TTL:PT15M}
+#          refresh-token-time-to-live: ${AUTH_REFRESH_TOKEN_TTL:P30D}
+#        client-settings:
+#          require-authorization-consent: false
+#auth:
+#  jwt:
+#    private-key: ${AUTH_JWT_PRIVATE_KEY:-----BEGIN PRIVATE KEY-----\n...}
+#    public-key: ${AUTH_JWT_PUBLIC_KEY:-----BEGIN PUBLIC KEY-----\n...}
 management:
   endpoints:
     web:
@@ -39,4 +39,4 @@ management:
         include: health,info,metrics,prometheus
 logging:
   level:
-    com.marketplace.auth: INFO
+    io.github.rbnascimento.marketplace.auth: INFO

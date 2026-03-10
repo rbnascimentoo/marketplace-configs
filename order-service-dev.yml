@@ -13,10 +13,10 @@ spring:
       ddl-auto: update
   kafka:
     consumer:
-      group-id: order-service-dev
+      group-id: marketplace-order-service-dev
 logging:
   level:
-    root: DEBUG
+    root: INFO
 order:
   payment:
     timeout: 10s

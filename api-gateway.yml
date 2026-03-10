@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: api-gateway
+    name: marketplace-api-gateway
   cloud:
     gateway:
       default-filters:
@@ -17,42 +17,45 @@ spring:
             statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
             methods: GET,POST
       routes:
-        - id: auth-service
-          uri: lb://auth-service
+        - id: marketplace-auth-service
+          uri: lb://marketplace-auth-service
           predicates:
             - Path=/auth/**
           filters:
             - StripPrefix=1
-        - id: user-service
-          uri: lb://user-service
+        - id: marketplace-user-service
+          uri: lb://marketplace-user-service
           predicates:
             - Path=/users/**
           filters:
             - StripPrefix=1
-        - id: product-service
-          uri: lb://product-service
+        - id: marketplace-product-service
+          uri: lb://marketplace-product-service
           predicates:
             - Path=/products/**
           filters:
             - StripPrefix=1
-        - id: order-service
-          uri: lb://order-service
+        - id: marketplace-order-service
+          uri: lb://marketplace-order-service
           predicates:
             - Path=/orders/**
           filters:
             - StripPrefix=1
-        - id: payment-service
-          uri: lb://payment-service
+        - id: marketplace-payment-service
+          uri: lb://marketplace-payment-service
           predicates:
             - Path=/payments/**
           filters:
             - StripPrefix=1
-        - id: notification-service
-          uri: lb://notification-service
+        - id: marketplace-notification-service
+          uri: lb://marketplace-notification-service
           predicates:
             - Path=/notifications/**
           filters:
             - StripPrefix=1
+      httpclient:
+        connect-timeout: 5000
+        response-timeout: 10s
     discovery:
       locator:
         enabled: true
@@ -61,9 +64,9 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${AUTH_JWT_ISSUER_URI:http://localhost:8081/realms/marketplace}
+          issuer-uri: ${AUTH_JWT_ISSUER_URI:http://keycloak:8080/realms/marketplace}
   redis:
-    host: ${REDIS_HOST:localhost}
+    host: ${REDIS_HOST:redis}
     port: ${REDIS_PORT:6379}
     password: ${REDIS_PASSWORD:}
 management:
@@ -76,6 +79,9 @@ management:
     web:
       exposure:
         include: health,info,metrics,prometheus,gateway
+  metrics:
+    tags:
+      application: marketplace-api-gateway
 logging:
   level:
     org.springframework.cloud.gateway: INFO

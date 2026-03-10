@@ -1,3 +1,5 @@
+server:
+  port: 8084
 spring:
   config:
     activate:
@@ -8,6 +10,9 @@ spring:
     password: ${PAYMENT_DB_PASSWORD:payment_pass}
     hikari:
       maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 20000
+      idle-timeout: 300000
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,7 +25,9 @@ spring:
           destination: payment.refund.dev
 logging:
   level:
-    root: DEBUG
+    root: INFO
+    org.springframework: INFO
+    io.github.rbnascimentoo.marketplace.user: DEBUG
 payment:
   provider:
     stripe:
@@ -31,4 +38,4 @@ payment:
       client-secret: ${PAYPAL_CLIENT_SECRET:}
   integrations:
     order-service:
-      base-url: http://localhost:8083
+      base-url: lb://marketplace-order-service

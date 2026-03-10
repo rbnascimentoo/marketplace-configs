@@ -10,8 +10,8 @@ spring:
             retries: 1
             statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
       httpclient:
-        connect-timeout: 2000
-        response-timeout: 5s
+        connect-timeout: 5000
+        response-timeout: 10s
   security:
     oauth2:
       resourceserver:
@@ -19,5 +19,5 @@ spring:
           issuer-uri: ${AUTH_JWT_ISSUER_URI:http://localhost:8081/realms/marketplace}
 logging:
   level:
-    root: DEBUG
+    root: INFO
     org.springframework.cloud.gateway: DEBUG

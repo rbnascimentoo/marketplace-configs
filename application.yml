@@ -10,7 +10,7 @@ spring:
   cloud:
     config:
       allow-override: true
-      override-none: true
+#      override-none: true
       override-system-properties: false
   threads:
     virtual:
@@ -32,7 +32,7 @@ management:
 logging:
   level:
     root: INFO
-    org.springframework.cloud: WARN
+    org.springframework.security: WARN
     org.springframework.web: INFO
 eureka:
   client:
@@ -44,7 +44,12 @@ eureka:
   instance:
     lease-renewal-interval-in-seconds: 20
     prefer-ip-address: true
+    hostname: ${HOSTNAME:localhost}
 resilience4j:
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 3s
   circuitbreaker:
     configs:
       default:
@@ -56,6 +61,7 @@ resilience4j:
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
         permittedNumberOfCallsInHalfOpenState: 5
+        timeoutDuration: 3s
   retry:
     configs:
       default:
@@ -63,7 +69,7 @@ resilience4j:
         waitDuration: 500ms
 springdoc:
   swagger-ui:
-    enabled: true
+    enabled: false
     tags-sorter: alpha
   api-docs:
-    enabled: true
+    enabled: false

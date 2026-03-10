@@ -7,8 +7,8 @@ spring:
       default-filters:
         - name: RequestRateLimiter
           args:
-            redis-rate-limiter.replenishRate: ${GATEWAY_RATE_LIMIT_REPLENISH:50}
-            redis-rate-limiter.burstCapacity: ${GATEWAY_RATE_LIMIT_BURST:150}
+            redis-rate-limiter.replenishRate: ${GATEWAY_RATE_LIMIT_REPLENISH:100}
+            redis-rate-limiter.burstCapacity: ${GATEWAY_RATE_LIMIT_BURST:200}
       httpclient:
         pool:
           type: elastic

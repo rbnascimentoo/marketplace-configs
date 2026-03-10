@@ -6,8 +6,11 @@ spring:
     config:
       server:
         git:
-          uri: ${CONFIG_GIT_URI:file:${user.home}/workspace/marketplace-configs}
+          uri: ${CONFIG_GIT_URI:file:./marketplace-configs}
           default-label: ${CONFIG_GIT_BRANCH:work}
+          clone-on-start: true
+          timeout: 5
 logging:
   level:
-    root: DEBUG
+    root: INFO
+    org.springframework.cloud.config: DEBUG

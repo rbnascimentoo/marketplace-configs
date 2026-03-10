@@ -9,10 +9,10 @@ spring:
     hikari:
       maximum-pool-size: ${AUTH_DB_MAX_POOL_SIZE:20}
       minimum-idle: 5
-  security:
-    oauth2:
-      authorizationserver:
-        issuer: ${AUTH_JWT_ISSUER:https://auth.marketplace.com}
+#  security:
+#    oauth2:
+#      authorizationserver:
+#        issuer: ${AUTH_JWT_ISSUER:https://auth.marketplace.com}
 management:
   endpoints:
     web:
@@ -21,7 +21,8 @@ management:
 logging:
   level:
     root: INFO
-auth:
-  jwt:
-    private-key: ${AUTH_JWT_PRIVATE_KEY}
-    public-key: ${AUTH_JWT_PUBLIC_KEY}
+    io.github.rbnascimentoo.marketplace.auth: INFO
+#auth:
+#  jwt:
+#    private-key: ${AUTH_JWT_PRIVATE_KEY}
+#    public-key: ${AUTH_JWT_PUBLIC_KEY}

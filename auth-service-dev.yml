@@ -11,15 +11,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-  security:
-    oauth2:
-      authorizationserver:
-        issuer: http://localhost:8080
+#  security:
+#    oauth2:
+#      authorizationserver:
+#        issuer: http://localhost:8080
 logging:
   level:
     root: DEBUG
-    com.marketplace.auth: DEBUG
-auth:
-  jwt:
-    private-key: ${AUTH_JWT_PRIVATE_KEY:}
-    public-key: ${AUTH_JWT_PUBLIC_KEY:}
+    io.github.rbnascimentoo.marketplace.auth: DEBUG
+#auth:
+#  jwt:
+#    private-key: ${AUTH_JWT_PRIVATE_KEY:}
+#    public-key: ${AUTH_JWT_PUBLIC_KEY:}
