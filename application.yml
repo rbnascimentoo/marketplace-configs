@@ -25,7 +25,7 @@ management:
       show-details: when_authorized
       roles: ADMIN
     prometheus:
-      enabled: true
+      access: read_only
   metrics:
     tags:
       application: marketplace

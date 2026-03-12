@@ -13,6 +13,9 @@ spring:
       minimum-idle: 3
       connection-timeout: 30000
       idle-timeout: 600000
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
   jpa:
     open-in-view: false
     hibernate:
