@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: marketplace-api-gateway
+  config:
+    import: optional:configserver:${SPRING_CLOUD_CONFIG_URI}
   cloud:
     gateway:
       default-filters:
@@ -18,37 +20,37 @@ spring:
             methods: GET,POST
       routes:
         - id: marketplace-auth-service
-          uri: lb://marketplace-auth-service
+          uri: http://marketplace-auth-service
           predicates:
             - Path=/auth/**
           filters:
             - StripPrefix=1
         - id: marketplace-user-service
-          uri: lb://marketplace-user-service
+          uri: http://marketplace-user-service
           predicates:
             - Path=/users/**
           filters:
             - StripPrefix=1
         - id: marketplace-product-service
-          uri: lb://marketplace-product-service
+          uri: http://marketplace-product-service
           predicates:
             - Path=/products/**
           filters:
             - StripPrefix=1
         - id: marketplace-order-service
-          uri: lb://marketplace-order-service
+          uri: http://marketplace-order-service
           predicates:
             - Path=/orders/**
           filters:
             - StripPrefix=1
         - id: marketplace-payment-service
-          uri: lb://marketplace-payment-service
+          uri: http://marketplace-payment-service
           predicates:
             - Path=/payments/**
           filters:
             - StripPrefix=1
         - id: marketplace-notification-service
-          uri: lb://marketplace-notification-service
+          uri: http://marketplace-notification-service
           predicates:
             - Path=/notifications/**
           filters:
@@ -56,19 +58,16 @@ spring:
       httpclient:
         connect-timeout: 5000
         response-timeout: 10s
-    discovery:
-      locator:
-        enabled: true
-        lower-case-service-id: true
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: ${AUTH_JWT_ISSUER_URI:http://keycloak:8080/realms/marketplace}
+          issuer-uri: ${AUTH_JWT_ISSUER_URI:http://keycloak:9090/realms/marketplace}
   redis:
     host: ${REDIS_HOST:redis}
     port: ${REDIS_PORT:6379}
     password: ${REDIS_PASSWORD:}
+    timeout: 6000
 management:
   endpoint:
     gateway:
