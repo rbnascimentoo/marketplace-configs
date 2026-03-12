@@ -65,9 +65,8 @@ spring:
           issuer-uri: ${AUTH_JWT_ISSUER_URI:http://keycloak:9090/realms/marketplace}
   data:
     redis:
-      host: ${REDIS_HOST:redis}
-      port: ${REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD:}
+      host: redis
+      port: 6379
       timeout: 6000
 management:
   endpoint:
