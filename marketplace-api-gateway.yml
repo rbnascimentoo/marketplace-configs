@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: marketplace-api-gateway
+  main:
+    web-application-type: reactive
   config:
     import: optional:configserver:${SPRING_CLOUD_CONFIG_URI}
   cloud:
@@ -19,6 +21,10 @@ spring:
             statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
             methods: GET,POST
       routes:
+        - id: test
+          uri: https://httpbin.org
+          predicates:
+            - Path=/test
         - id: marketplace-auth-service
           uri: http://marketplace-auth-service
           predicates:
@@ -71,7 +77,7 @@ spring:
 management:
   endpoint:
     gateway:
-      access: read_only
+      enabled: true
     health:
       show-details: when_authorized
   endpoints:
@@ -84,6 +90,7 @@ management:
 logging:
   level:
     org.springframework.cloud.gateway: INFO
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: DEBUG
 rate-limiter:
   redis:
     enabled: true
