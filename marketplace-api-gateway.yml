@@ -18,47 +18,49 @@ spring:
             retries: 2
             statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
             methods: GET,POST
-      routes:
-        - id: test
-          uri: https://httpbin.org
-          predicates:
-            - Path=/test
-        - id: marketplace-auth-service
-          uri: http://marketplace-auth-service
-          predicates:
-            - Path=/auth/**
-          filters:
-            - StripPrefix=1
-        - id: marketplace-user-service
-          uri: http://marketplace-user-service
-          predicates:
-            - Path=/users/**
-          filters:
-            - StripPrefix=1
-        - id: marketplace-product-service
-          uri: http://marketplace-product-service
-          predicates:
-            - Path=/products/**
-          filters:
-            - StripPrefix=1
-        - id: marketplace-order-service
-          uri: http://marketplace-order-service
-          predicates:
-            - Path=/orders/**
-          filters:
-            - StripPrefix=1
-        - id: marketplace-payment-service
-          uri: http://marketplace-payment-service
-          predicates:
-            - Path=/payments/**
-          filters:
-            - StripPrefix=1
-        - id: marketplace-notification-service
-          uri: http://marketplace-notification-service
-          predicates:
-            - Path=/notifications/**
-          filters:
-            - StripPrefix=1
+      server:
+        webflux:
+          routes:
+            - id: test
+              uri: https://httpbin.org
+              predicates:
+                - Path=/test
+            - id: marketplace-auth-service
+              uri: http://marketplace-auth-service
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
+            - id: marketplace-user-service
+              uri: http://marketplace-user-service
+              predicates:
+                - Path=/users/**
+              filters:
+                - StripPrefix=1
+            - id: marketplace-product-service
+              uri: http://marketplace-product-service
+              predicates:
+                - Path=/products/**
+              filters:
+                - StripPrefix=1
+            - id: marketplace-order-service
+              uri: http://marketplace-order-service
+              predicates:
+                - Path=/orders/**
+              filters:
+                - StripPrefix=1
+            - id: marketplace-payment-service
+              uri: http://marketplace-payment-service
+              predicates:
+                - Path=/payments/**
+              filters:
+                - StripPrefix=1
+            - id: marketplace-notification-service
+              uri: http://marketplace-notification-service
+              predicates:
+                - Path=/notifications/**
+              filters:
+                - StripPrefix=1
       httpclient:
         connect-timeout: 5000
         response-timeout: 10s
