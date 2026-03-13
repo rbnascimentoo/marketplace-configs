@@ -5,21 +5,23 @@ spring:
     name: marketplace-api-gateway
   main:
     web-application-type: reactive
+  config:
+    import: optional:configserver:${SPRING_CLOUD_CONFIG_URI}
   cloud:
     gateway:
-      default-filters:
-        - name: RequestRateLimiter
-          args:
-            key-resolver: '#{@remoteAddressResolver}'
-            redis-rate-limiter.replenishRate: 100
-            redis-rate-limiter.burstCapacity: 200
-        - name: Retry
-          args:
-            retries: 2
-            statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
-            methods: GET,POST
       server:
         webflux:
+          default-filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddressResolver}'
+                redis-rate-limiter.replenishRate: 100
+                redis-rate-limiter.burstCapacity: 200
+            - name: Retry
+              args:
+                retries: 2
+                statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
+                methods: GET,POST
           routes:
             - id: test
               uri: https://httpbin.org
@@ -61,9 +63,9 @@ spring:
                 - Path=/notifications/**
               filters:
                 - StripPrefix=1
-      httpclient:
-        connect-timeout: 5000
-        response-timeout: 10s
+          httpclient:
+            connect-timeout: 5000
+            response-timeout: 10s
   security:
     oauth2:
       resourceserver:
