@@ -5,8 +5,6 @@ spring:
     name: marketplace-api-gateway
   main:
     web-application-type: reactive
-  config:
-    import: optional:configserver:${SPRING_CLOUD_CONFIG_URI}
   cloud:
     gateway:
       default-filters:
