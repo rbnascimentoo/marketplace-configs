@@ -4,14 +4,16 @@ spring:
       on-profile: dev
   cloud:
     gateway:
-      default-filters:
-        - name: Retry
-          args:
-            retries: 1
-            statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
-      httpclient:
-        connect-timeout: 5000
-        response-timeout: 10s
+      server:
+        webflux:
+          default-filters:
+            - name: Retry
+              args:
+                retries: 1
+                statuses: BAD_GATEWAY,SERVICE_UNAVAILABLE
+          httpclient:
+            connect-timeout: 5000
+            response-timeout: 10s
   security:
     oauth2:
       resourceserver:
