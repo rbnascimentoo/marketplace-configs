@@ -16,7 +16,7 @@ spring:
 management:
   endpoint:
     gateway:
-      enabled: true
+      access: read_only
   endpoints:
     web:
       exposure:
